@@ -1,0 +1,9 @@
+// Cloudflare Workers config — serves the built site (dist/) as static files.
+// The "name" must match the project name in the Cloudflare dashboard.
+{
+  "name": "dellangelo-menu",
+  "compatibility_date": "2026-06-01",
+  "assets": {
+    "directory": "./dist"
+  }
+}
