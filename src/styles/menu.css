@@ -1,0 +1,224 @@
+/* ================= layout & scaling ================= */
+.menu {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  background: var(--cream);
+}
+.menu--wide {   height: 100vh;
+  min-height: 0;
+  align-items: center;
+  overflow: hidden; }
+
+.menu__stage { position: relative; flex: none; }
+
+.menu__canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
+  display: flex;
+}
+.menu--stacked .menu__canvas { flex-direction: column; }
+
+/* soft paper grain over everything */
+.menu::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  opacity: .5;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .55 0 0 0 0 .45 0 0 0 0 .35 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ================= a page = 720 × 977 design px ================= */
+.page {
+  position: relative;
+  width: calc(720px * var(--k));
+  height: 977px;
+  flex: none;
+  overflow: hidden;
+}
+
+.col { position: absolute; }
+
+/* page one */
+.col--orektika   { left: calc(30px * var(--k));  top: 28px;  width: calc(318px * var(--kw)); }
+.col--salates    { left: calc(30px * var(--k));  top: 423px; width: calc(318px * var(--kw)); }
+.col--pizza      { left: calc(364px * var(--k)); top: 28px;  width: calc(326px * var(--kw)); }
+/* page two */
+.col--pasta       { left: calc(30px * var(--k));  top: 28px;  width: calc(328px * var(--kw)); }
+.col--anapsyktika { left: calc(376px * var(--k)); top: 28px;  width: calc(320px * var(--kw)); }
+.col--pota        { left: calc(376px * var(--k)); top: 238px; width: calc(320px * var(--kw)); }
+
+/* ================= decorations ================= */
+.deco { position: absolute; pointer-events: none; }
+
+.deco--square {
+  --rot: 280.5deg;
+  width: 300px;
+  height: 300px;
+  left: -72px;
+  top: 806px;
+}
+.deco--basil {
+  width: 136px;
+  left: 46px;
+  top: 790px;
+  filter: drop-shadow(0 2px 2px rgba(60, 25, 10, .18));
+}
+.deco--tomatoes {        /* stays glued to the right edge */
+  width: 226px;
+  right: -2px;
+  top: 628px;
+}
+.deco--logo {            /* centred under the drinks column */
+  width: 250px;
+  left: calc(376px * var(--k) + 120px * var(--kw) - 84px);
+  top: 470px;
+}
+
+/* ================= headings ================= */
+.heading { margin-bottom: 22px; }
+
+.heading__title {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-left: 6px;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 1;
+  letter-spacing: .15em;
+  color: var(--red);
+}
+.heading__aside {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .01em;
+  padding-right: 4px;
+}
+.heading__aside b {
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: 0;
+  margin-left: 3px;
+}
+
+.heading__rule {
+  height: 2px;
+  margin-top: 5px;
+  background: var(--red);
+  border-radius: 1px;
+}
+
+/* ================= items ================= */
+.items { list-style: none; }
+
+.item + .item { margin-top: 2.5px; }
+
+.item__line {
+  display: flex;
+  align-items: baseline;
+  font-family: var(--font-head);
+  font-weight: 500;
+  font-size: 12.2px;
+  line-height: 15px;
+  letter-spacing: .015em;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.item__num {
+  flex: none;
+  min-width: 22px;
+  font-weight: 400;
+}
+.item__name { flex: none; }
+.item__extra {
+  font-family: var(--font-body);
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--ink-soft);
+}
+
+/* dotted leader between name and price */
+.item__leader {
+  flex: 1;
+  min-width: 10px;
+  height: 1em;
+  margin: 0 3px;
+  background-image: radial-gradient(circle, currentColor .75px, transparent 1.05px);
+  background-size: 4px 3px;
+  background-repeat: repeat-x;
+  background-position: left bottom 1px;
+  opacity: .8;
+}
+.item__price { flex: none; font-weight: 500; }
+
+.item__desc {
+  padding-left: 22px;
+  margin-top: -.5px;
+  font-family: var(--font-body);
+  font-size: 10.6px;
+  line-height: 12.4px;
+  color: var(--ink-soft);
+}
+.item__desc--flush { padding-left: 0; }
+
+/* the long pizza list is a touch tighter and more condensed, like the print */
+.items--pizza .item + .item { margin-top: 1.5px; }
+.items--pizza .item__line { line-height: 14px; }
+.items--pizza .item__desc { font-size: 9.8px; line-height: 11.6px; letter-spacing: -.025em; }
+
+/* drinks: no numbers, more air */
+.items--drinks .item + .item { margin-top: 3px; }
+.items--drinks .item__line { font-size: 11.8px; }
+
+/* ================= sub-headings ================= */
+.subheading {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 11.5px;
+  line-height: 14px;
+  letter-spacing: .02em;
+  color: var(--ink);
+  margin-bottom: 14px;
+}
+.subheading__extra {
+  font-family: var(--font-body);
+  font-weight: 400;
+  color: var(--ink-soft);
+}
+
+.col--pasta .heading { margin-bottom: 18px; }
+.col--pasta .group + .group { margin-top: 22px; }
+
+.subheading--pizza {
+  margin: 14px 0 12px;
+  font-size: 12px;
+}
+
+/* ================= notes & small print ================= */
+.notes {
+  font-family: var(--font-body);
+  font-size: 10.6px;
+  line-height: 14px;
+  color: var(--ink-soft);
+}
+.notes--after-list { margin-top: 16px; }
+.notes--pasta { margin-top: 18px; }
+.notes--pizza { font-size: 11px; line-height: 14.5px; }
+.notes__indent { padding-left: 120px; }
+
+.legal {
+  position: absolute;
+  right: 30px;
+  bottom: 56px;
+  text-align: right;
+  font-size: 9.8px;
+  line-height: 14px;
+}

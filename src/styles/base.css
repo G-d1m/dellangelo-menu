@@ -1,0 +1,28 @@
+
+:root {
+  --red: #E2725B;
+  --cream: #FFF9DD;
+  --brown: #7A3E2A;   
+  --ink: #3A2A22;     
+  --ink-soft: #5A4639;
+
+  --font-script: 'Bodoni Moda', serif;   /* intro tagline */
+  --font-head: 'Commissioner', system-ui, sans-serif;
+  --font-body: 'Didact Gothic', 'Commissioner', system-ui, sans-serif;
+}
+
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body, #root { margin: 0; height: 100%; }
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+p, h2, h3, ul { margin: 0; padding: 0; }
+img { display: block; user-select: none; }

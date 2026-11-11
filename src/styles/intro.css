@@ -1,0 +1,79 @@
+.intro {
+  /* logo size; the image is 1017 × 821 */
+  --logo-w: min(40vw, 480px, calc(50vh * 1.239));
+  --logo-h: calc(var(--logo-w) * 0.8073);
+  /* zoom point = the cream spot closest to the logo's centre
+     (between the ' and the A) — keep in sync with Intro.jsx */
+  --ox: 51.92%;
+  --oy: 49.33%;
+
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: grid;
+  place-items: center;
+  background: var(--red);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.intro__group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* lift the group a little so logo + text sit optically centred */
+  transform: translateY(-2vh);
+}
+
+.intro__logo {
+  width: var(--logo-w);
+  height: auto;
+  transform-origin: var(--ox) var(--oy);
+  will-change: transform;
+}
+
+.intro__text {
+  margin-top: clamp(14px, 3vh, 34px);
+  text-align: center;
+  color: var(--cream);
+  font-family: var(--font-script);
+  line-height: 1;
+  transition: opacity 450ms ease;
+}
+
+.intro__tagline {
+  font-size: clamp(42px, 6.2vw, 92px);
+  letter-spacing: .01em;
+}
+
+.intro__since {
+  margin-top: .35em;
+  font-size: clamp(22px, 2.9vw, 42px);
+  letter-spacing: .04em;
+}
+
+/* ---- expand: zoom through the cream until it fills the screen ---- */
+.intro--expand .intro__text { opacity: 0; }
+
+/* the zoom itself runs from Intro.jsx (one smooth, continuous animation) */
+
+/* safety net: a cream layer that fades in during the last part of the zoom */
+.intro__cream {
+  position: absolute;
+  inset: 0;
+  background: var(--cream);
+  opacity: 0;
+  pointer-events: none;
+}
+.intro--expand .intro__cream {
+  animation: cream-in var(--expand-dur) linear forwards;
+}
+@keyframes cream-in {
+  0%, 88% { opacity: 0; }
+  100%    { opacity: 1; }
+}
+
+/* phones / portrait screens: bigger logo */
+@media (max-aspect-ratio: 1/1) {
+  .intro { --logo-w: min(72vw, 420px, calc(46vh * 1.239)); }
+}

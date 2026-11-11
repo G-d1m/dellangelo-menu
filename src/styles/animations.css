@@ -1,0 +1,92 @@
+
+@property --wipe {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: -15%;
+}
+
+.write {
+  --wipe: -15%;
+  -webkit-mask-image: linear-gradient(90deg, #000 calc(var(--wipe) - 6%), transparent calc(var(--wipe) + 4%));
+          mask-image: linear-gradient(90deg, #000 calc(var(--wipe) - 6%), transparent calc(var(--wipe) + 4%));
+  animation: write var(--dur, 800ms) cubic-bezier(.42, .05, .38, 1) var(--d, 0ms) both;
+}
+
+@keyframes write {
+  from { --wipe: -15%; }
+  to   { --wipe: 115%; }
+}
+
+
+.anim-logo-in {
+  animation: logo-in var(--dur) cubic-bezier(.2, .8, .25, 1.15) var(--d) both;
+}
+@keyframes logo-in {
+  0%   { opacity: 0; transform: scale(.72); filter: blur(10px); }
+  60%  { opacity: 1; filter: blur(0); }
+  100% { opacity: 1; transform: scale(1); filter: blur(0); }
+}
+
+
+.anim-square {
+  animation: square-in var(--dur) cubic-bezier(.22, .9, .3, 1) var(--d) both;
+}
+@keyframes square-in {
+  from { transform: translateX(-160%) rotate(calc(var(--rot, 270deg) - 360deg)); }
+  to   { transform: translateX(0) rotate(var(--rot, 270deg)); }
+}
+
+
+.anim-from-right {
+  animation: from-right var(--dur) cubic-bezier(.22, .9, .3, 1) var(--d) both;
+}
+@keyframes from-right {
+  from { transform: translateX(110%); }
+  to   { transform: translateX(0); }
+}
+
+
+.anim-grow {
+  transform-origin: 48% 38%;
+  animation: grow var(--dur) cubic-bezier(.3, 1.35, .5, 1) var(--d) both;
+}
+@keyframes grow {
+  from { opacity: 0; transform: scale(.12) rotate(-14deg); }
+  35%  { opacity: 1; }
+  to   { opacity: 1; transform: scale(1) rotate(0); }
+}
+
+
+.anim-pop {
+  animation: pop var(--dur) cubic-bezier(.3, .7, .4, 1) var(--d) both;
+}
+@keyframes pop {
+  0%   { opacity: 0; transform: scale(0); }
+  45%  { opacity: 1; transform: scale(1.22); }
+  72%  { transform: scale(.92); }
+  88%  { transform: scale(1.03); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+
+.appear {
+  animation: appear var(--dur) ease-out var(--d) both;
+}
+@keyframes appear {
+  from { opacity: 0; filter: blur(3px); }
+  to   { opacity: 1; filter: blur(0); }
+}
+
+
+.page:not(.is-playing) .write,
+.page:not(.is-playing) [class*='anim-'],
+.page:not(.is-playing) .appear {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .write, .appear, [class*='anim-'] {
+    animation-duration: 1ms !important;
+    animation-delay: 0ms !important;
+  }
+}
