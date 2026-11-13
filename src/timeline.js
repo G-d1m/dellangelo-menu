@@ -50,6 +50,9 @@ export const PHONE = {
   tomatoesDur: 1400,
   leaves: 1500,       // grow after the square lands
   leavesDur: 900,
+  info: 1300,         // address / phones / hours fade in
+  infoDur: 900,
+  deal: 1700,         // the 10% line, a moment later
 
   // per section, from the moment it scrolls into view
   lines: 0,

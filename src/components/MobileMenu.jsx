@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { PHONE } from '../timeline.js'
-import { orektika, salates, pizza, pasta, anapsyktika, pota, legal } from '../menuData.js'
+import { orektika, salates, pizza, pasta, anapsyktika, pota, legal, shopInfo } from '../menuData.js'
 
 
 const SECTIONS = [
@@ -138,6 +138,42 @@ function Section({ id, data, drinks, sectionRef }) {
 }
 
 
+/* ---------- shop info under the logo ---------- */
+
+const tel = (n) => `tel:+30${n.replace(/\s/g, '')}`
+
+function ShopInfo() {
+  const i = shopInfo
+  return (
+    <div className="m-info">
+      <div className="m-info__small appear" style={at(PHONE.info, PHONE.infoDur)}>
+        <a className="m-info__addr" href={i.mapsUrl} target="_blank" rel="noopener noreferrer">
+          <svg className="m-info__pin" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z" />
+          </svg>
+          {i.address}
+        </a>
+        <p className="m-info__phones">
+          <span className="m-info__label">Delivery</span>
+          {i.phones.map((n, k) => (
+            <span key={n}>
+              {k > 0 && <span className="m-info__dot"> · </span>}
+              <a href={tel(n)}>{n}</a>
+            </span>
+          ))}
+        </p>
+        <p>
+          {i.hours} <span className="m-info__dot">·</span> {i.closed}
+        </p>
+      </div>
+      <div className="m-info__deal appear" style={at(PHONE.deal, PHONE.infoDur)}>
+        <strong>{i.discount.big}</strong>
+        <span>{i.discount.small}</span>
+      </div>
+    </div>
+  )
+}
+
 export default function MobileMenu() {
   const sections = useRef({})
   const chipsRef = useRef(null)
@@ -199,6 +235,7 @@ export default function MobileMenu() {
           src="/img/logo-cream.png"
           alt="Dell'Angelo Pizzeria"
         />
+        <ShopInfo />
       </header>
 
       <nav className="m-chips" ref={chipsRef} aria-label="Κατηγορίες">

@@ -154,3 +154,13 @@ export const legal = [
   '*Αγορανομικός υπεύθυνος: Δημητρακόπουλος Άγγελος',
   '*Στις τιμές συμπεριλαμβάνονται όλες οι νόμιμες επιβαρύνσεις: 13% & 24%',
 ]
+
+/* Shop info — shown on the phone header, under the logo */
+export const shopInfo = {
+  address: 'Πλατεία Ανεξαρτησίας 9, Ηλιούπολη',
+  mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Dell%27Angelo+Pizzeria+%CE%A0%CE%BB%CE%B1%CF%84%CE%B5%CE%AF%CE%B1+%CE%91%CE%BD%CE%B5%CE%BE%CE%B1%CF%81%CF%84%CE%B7%CF%83%CE%AF%CE%B1%CF%82+9+%CE%97%CE%BB%CE%B9%CE%BF%CF%8D%CF%80%CE%BF%CE%BB%CE%B7',
+  phones: ['210 9735 359', '693 9854 859'],
+  hours: '18:00 – 00:00',
+  closed: 'Τρίτη κλειστά',
+  discount: { big: '10% ΕΚΠΤΩΣΗ ΤΙΜΩΝ', small: 'με παραλαβή από το κατάστημα' },
+}
