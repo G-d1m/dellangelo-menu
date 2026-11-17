@@ -1,17 +1,15 @@
 import { MENU } from '../timeline.js'
 
-/* timing helpers → inline CSS custom properties */
 export const at = (delay, dur) => ({ '--d': `${delay}ms`, '--dur': `${dur}ms` })
 const itemAt = (row) => at(MENU.items + row * MENU.itemsStagger, MENU.itemsDur)
 const smallAt = () => at(MENU.small, MENU.smallDur)
 
-/* Each section gets its own row counter so all sections write in parallel. */
 export function rowCounter() {
   let i = 0
   return () => i++
 }
 
-/* Red title + red underline */
+
 export function Heading({ title, aside }) {
   return (
     <div className="heading">
